@@ -77,7 +77,7 @@ public class IndexController {
         return "home/home";
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/logOut")
     public String logout(HttpSession session) {
         if(!StringUtils.isEmpty(session.getAttribute("userId"))) {
             String userId = session.getAttribute("userId").toString();
