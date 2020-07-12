@@ -6,8 +6,8 @@
 </head>
 <body>
 <h3 th:text="${title}">Welcome to springboot</h3>
-<form action="/user"  method="post" >
-    用户名称：<br>
+<form action="/user"  method="post" th:object="${user}" >
+    用户姓名：<br>
     <input type="text" name="userName" th:value="*{userName}">
     <br>
     用户账号：<br>
@@ -19,8 +19,8 @@
     用户类型：<br>
     <!--<input type="text" name="type" th:value="*{type}">-->
 
-    <input type="radio"  name="type"  th:value="2" />教师
-    <input type="radio"  name="type"  th:value="3" />学生
+    <input type="radio"  name="type"  th:checked="${user.type}==2" th:value="2" />教师
+    <input type="radio"  name="type"  th:checked="${user.type}==3" th:value="3" />学生
     <br>
     <input type="submit" value="提交">
 </form>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,7 +67,13 @@ public class SubjectController {
      */
     @Secured("ROLE_TEACHER")
     @PostMapping(value = "")
-    public String saveSubeject(SubjectEntity subjectEntity){
+    public String saveSubeject(Model model, SubjectEntity subjectEntity){
+        if(StringUtils.isEmpty(subjectEntity.getSubjectName())) {
+            model.addAttribute("title","科目管理");
+            model.addAttribute("error","科目名称不能为空");
+            model.addAttribute("subject",subjectEntity);
+            return "subject/add";
+        }
         subjectService.save(subjectEntity);
         return "redirect:/subject";
     }

@@ -8,6 +8,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,11 +70,29 @@ public class UserController {
     @Secured("ROLE_ADMIN")
     @PostMapping(value = "")
     public String saveUser(UserEntity userEntity,Model model){
+
+        model.addAttribute("user",userEntity);
+        model.addAttribute("title","用户管理");
+        if(StringUtils.isEmpty(userEntity.getUserName())) {
+            model.addAttribute("error","用户姓名不能为空");
+            return "user/add";
+        }
+        if(StringUtils.isEmpty(userEntity.getUserAccount())) {
+            model.addAttribute("error","用户账号不能为空");
+            return "user/add";
+        }
+        if(StringUtils.isEmpty(userEntity.getUserPassport())) {
+            model.addAttribute("error","用户密码不能为空");
+            return "user/add";
+        }
+        if(StringUtils.isEmpty(userEntity.getType())) {
+            model.addAttribute("error","用户类型不能为空");
+            return "user/add";
+        }
         ResponseJson responseJson = userService.save(userEntity);
         if(responseJson.getStatus() == 500) {
-            model.addAttribute("title","用户管理");
             model.addAttribute("error",responseJson.getDesc());
-            model.addAttribute("user",userEntity);
+
             return "user/add";
         }
         return "redirect:/user";
