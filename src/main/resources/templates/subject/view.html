@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf in action</title>
+</head>
+<body>
+<h3 th:text="${title}"></h3>
+<div>
+    <p><strong>ID:</strong><span th:text="${subject.id}"></span></p>
+    <p><strong>科目名称:</strong><span th:text="${subject.subjectName}"></span></p>
+</div>
+</body>
+</html>

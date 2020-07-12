@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>今晚天气好</title>
+</head>
+<body>
+<h3 th:text="${title}">Welcome to springboot</h3>
+<div>
+    <a th:href="@{/loginOut}" >用户退出</a>
+</div>
+<div>
+    <!--<a href="/users/form.html" th:href="@{/users/form}">创建用户</a>-->
+    <a th:href="@{/user/form}" >添加用户</a>
+</div>
+<table border="1">
+    <thead>
+    <tr>
+        <td>序号</td>
+        <td>用户姓名</td>
+        <td>用户账号</td>
+        <td>用户类型</td>
+        <td th:colspan="3" >操作</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${userList.size()} eq 0">
+        <td colspan="3">没有用户信息！！</td>
+    </tr>
+    <tr th:each="user : ${userList}">
+        <td th:text="${user.id}">1</td>
+        <td th:text="${user.userName}">11</td>
+        <td th:text="${user.userAccount}">11</td>
+        <!--<td th:if="${user.type}!=null and ''!=${user.type}" style="" th:text="${user.type}==1?'教师':'学生'"></td>-->
+        <td th:switch="${user.type}"><p th:case="''"></p><p><p th:case="2">教师</p><p><p th:case="3">学生</p></td>
+        <td align="right">
+            <a th:href="@{'user/modify/'+${user.id}}">编辑</a>
+        </td>
+        <td align="right">
+            <a th:href="@{'user/del/'+${user.id}}">删除</a>
+        </td>
+
+        <td align="right">
+            <a th:href="@{'user/one/'+${user.id}}">详情</a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>welcome</title>
+</head>
+<body>
+<h3 th:text="${title}">Welcome to springboot</h3>
+<form action="/subject" th:action="@{/subject}" method="post" th:object="${subject}" >
+    <input type="hidden" name="id" th:value="*{id}">
+    科目名称：<br>
+    <input type="text" name="subjectName" th:value="*{subjectName}">
+    <br>
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>

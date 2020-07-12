@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>welcome</title>
+</head>
+<body>
+<h3 th:text="${title}">Welcome to springboot</h3>
+<form action="/user" th:action="@{/user}" method="post" th:object="${user}" >
+    <input type="hidden" name="id" th:value="*{id}">
+    用户姓名：<br>
+    <input type="text" name="userName" th:value="*{userName}">
+    <br>
+    用户账号：<br>
+    <input type="text" name="userAccount" readonly="true"  th:value="*{userAccount}">
+    <br>
+    <input type="hidden"  name="userPassport" th:value="*{userPassport}">
+    用户类型：<br>
+
+    <input type="radio"  name="type"  th:value="2" th:checked="${user.type}==2" />教师
+    <input type="radio"  name="type"  th:value="3" th:checked="${user.type}==3" />学生
+
+    <br>
+    <input type="submit" value="提交">
+</form>
+
+</body>
+</html>
